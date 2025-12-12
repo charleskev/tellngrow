@@ -1,0 +1,181 @@
+<!-- User Progress Tracking -->
+{{> header}}
+{{> navbar}}
+
+<div class="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 py-12">
+    <div class="max-w-6xl mx-auto px-4">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-gray-800 mb-3">📊 Your Progress</h1>
+            <p class="text-xl text-gray-600">Track your wellness journey and achievements</p>
+        </div>
+
+        <!-- Overview Cards -->
+        <div class="grid md:grid-cols-4 gap-6 mb-12">
+            <!-- Total Points -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-gray-600 text-sm">Total Points</p>
+                        <p class="text-4xl font-bold text-purple-600">{{progress.totalPoints}}</p>
+                    </div>
+                    <span class="text-4xl">💎</span>
+                </div>
+                <p class="text-xs text-gray-500">Accumulated from all activities</p>
+            </div>
+
+            <!-- Current Level -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-gray-600 text-sm">Current Level</p>
+                        <p class="text-4xl font-bold text-green-600 capitalize">{{progress.level}}</p>
+                    </div>
+                    <span class="text-4xl">⭐</span>
+                </div>
+                <p class="text-xs text-gray-500">Keep playing to level up!</p>
+            </div>
+
+            <!-- Current Streak -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-gray-600 text-sm">Current Streak</p>
+                        <p class="text-4xl font-bold text-orange-600">{{progress.currentStreak}}</p>
+                    </div>
+                    <span class="text-4xl">🔥</span>
+                </div>
+                <p class="text-xs text-gray-500">Days in a row</p>
+            </div>
+
+            <!-- Achievements -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-gray-600 text-sm">Achievements</p>
+                        <p class="text-4xl font-bold text-blue-600">{{achievements.unlocked}}/{{achievements.total}}</p>
+                    </div>
+                    <span class="text-4xl">🏆</span>
+                </div>
+                <p class="text-xs text-gray-500">Keep going!</p>
+            </div>
+        </div>
+
+        <!-- Activity Breakdown -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <!-- Games Statistics -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">🎮 Games Progress</h2>
+                <div class="space-y-4">
+                    {{#if gameStats}}
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <p class="text-gray-700 font-semibold">Breathing Bubble</p>
+                                <span class="text-sm text-gray-600">{{gameStats.[breathing-bubble].played}} plays</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-blue-500 h-3 rounded-full" style="width: {{gameStats.[breathing-bubble].percentage}}%;"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">{{gameStats.[breathing-bubble].played}} completed · Avg: {{gameStats.[breathing-bubble].avgScore}} pts</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <p class="text-gray-700 font-semibold">Color Tap</p>
+                                <span class="text-sm text-gray-600">{{gameStats.[color-tap].played}} plays</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-pink-500 h-3 rounded-full" style="width: {{gameStats.[color-tap].percentage}}%;"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">{{gameStats.[color-tap].played}} completed · Avg: {{gameStats.[color-tap].avgScore}} pts</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <p class="text-gray-700 font-semibold">Grid Memory</p>
+                                <span class="text-sm text-gray-600">{{gameStats.[grid-memory].played}} plays</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-green-500 h-3 rounded-full" style="width: {{gameStats.[grid-memory].percentage}}%;"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">{{gameStats.[grid-memory].played}} completed · Avg: {{gameStats.[grid-memory].avgScore}} pts</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <p class="text-gray-700 font-semibold">Stress Ball</p>
+                                <span class="text-sm text-gray-600">{{gameStats.[stress-ball].played}} plays</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-red-500 h-3 rounded-full" style="width: {{gameStats.[stress-ball].percentage}}%;"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">{{gameStats.[stress-ball].played}} completed · Avg: {{gameStats.[stress-ball].avgScore}} pts</p>
+                        </div>
+                    {{else}}
+                        <p class="text-gray-500 text-center py-8">No games played yet. Start playing to see your stats!</p>
+                    {{/if}}
+                </div>
+            </div>
+
+            <!-- Wellness Score -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">📈 Wellness Metrics</h2>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="text-gray-700 font-semibold">Mental Health Score</p>
+                            <p class="text-2xl font-bold text-purple-600">{{wellness.mentalHealth}}/100</p>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div class="bg-purple-500 h-4 rounded-full" style="width: {{wellness.mentalHealth}}%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="text-gray-700 font-semibold">Daily Activity</p>
+                            <p class="text-2xl font-bold text-green-600">{{wellness.dailyActivity}}/100</p>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div class="bg-green-500 h-4 rounded-full" style="width: {{wellness.dailyActivity}}%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="text-gray-700 font-semibold">Learning Progress</p>
+                            <p class="text-2xl font-bold text-blue-600">{{wellness.learningProgress}}/100</p>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div class="bg-blue-500 h-4 rounded-full" style="width: {{wellness.learningProgress}}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Unlocked -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">🏆 Achievements</h2>
+            <div class="grid md:grid-cols-4 gap-4">
+                {{#if achievements}}
+                    {{#each achievements}}
+                        <div class="{{#if this.unlocked}}bg-gradient-to-br from-yellow-300 to-orange-400{{else}}bg-gradient-to-br from-gray-300 to-gray-400{{/if}} rounded-lg p-4 text-center transform transition hover:scale-105">
+                            <p class="text-4xl mb-2">{{this.icon}}</p>
+                            <p class="font-bold text-white">{{this.name}}</p>
+                            <p class="text-xs text-white opacity-75">{{this.description}}</p>
+                        </div>
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-4 justify-center">
+            <a href="/games" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition">
+                Keep Playing
+            </a>
+            <a href="/dashboard" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-8 rounded-lg transition">
+                Back to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+{{> footer}}
+

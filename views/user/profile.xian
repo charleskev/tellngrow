@@ -1,0 +1,119 @@
+<!-- User Profile Page -->
+{{> header}}
+{{> navbar}}
+
+<div class="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50 py-12">
+    <div class="max-w-4xl mx-auto px-4">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl p-8 mb-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-6">
+                    <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center text-5xl">
+                        {{user.avatar}} 👤
+                    </div>
+                    <div>
+                        <h1 class="text-4xl font-bold mb-2">{{user.name}}</h1>
+                        <p class="text-indigo-100">Member since {{dateFormat user.createdAt}}</p>
+                    </div>
+                </div>
+                <a href="/user/profile/edit" class="bg-white text-indigo-600 font-semibold py-2 px-6 rounded-lg hover:bg-indigo-50 transition">
+                    Edit Profile
+                </a>
+            </div>
+        </div>
+
+        <!-- Profile Sections -->
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <!-- Personal Information -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-user-circle text-indigo-600 mr-3"></i>Personal Information
+                </h2>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm text-gray-600">First Name</p>
+                        <p class="text-lg font-semibold text-gray-800">{{user.firstName}}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Last Name</p>
+                        <p class="text-lg font-semibold text-gray-800">{{user.lastName}}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Email</p>
+                        <p class="text-lg font-semibold text-gray-800">{{user.email}}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Role</p>
+                        <p class="text-lg font-semibold text-gray-800 capitalize">{{user.role}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferences -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-sliders-h text-indigo-600 mr-3"></i>Preferences
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span class="font-semibold text-gray-700">🔔 Notifications</span>
+                        <label class="flex items-center">
+                            <input type="checkbox" {{#if user.notifications}}checked{{/if}} class="w-4 h-4">
+                        </label>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span class="font-semibold text-gray-700">🔊 Sound Effects</span>
+                        <label class="flex items-center">
+                            <input type="checkbox" {{#if user.soundEffects}}checked{{/if}} class="w-4 h-4">
+                        </label>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span class="font-semibold text-gray-700">🎨 Theme</span>
+                        <select class="px-3 py-1 border rounded-lg text-gray-700">
+                            <option {{#ifEquals user.theme 'light'}}selected{{/ifEquals}}>Light</option>
+                            <option {{#ifEquals user.theme 'dark'}}selected{{/ifEquals}}>Dark</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Summary -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-chart-line text-indigo-600 mr-3"></i>Activity Summary
+            </h2>
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="bg-indigo-50 rounded-lg p-4 text-center">
+                    <p class="text-gray-600 text-sm">Games Played</p>
+                    <p class="text-3xl font-bold text-indigo-600">{{progress.totalGamesPlayed}}</p>
+                </div>
+                <div class="bg-blue-50 rounded-lg p-4 text-center">
+                    <p class="text-gray-600 text-sm">Quizzes Completed</p>
+                    <p class="text-3xl font-bold text-blue-600">{{progress.totalQuizzesTaken}}</p>
+                </div>
+                <div class="bg-purple-50 rounded-lg p-4 text-center">
+                    <p class="text-gray-600 text-sm">Journal Entries</p>
+                    <p class="text-3xl font-bold text-purple-600">{{progress.totalJournalEntries}}</p>
+                </div>
+                <div class="bg-green-50 rounded-lg p-4 text-center">
+                    <p class="text-gray-600 text-sm">Days Active</p>
+                    <p class="text-3xl font-bold text-green-600">{{progress.currentStreak}}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-4 justify-center">
+            <a href="/user/progress" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg transition">
+                View Progress
+            </a>
+            <a href="/dashboard" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-8 rounded-lg transition">
+                Back to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+{{> footer}}
+
